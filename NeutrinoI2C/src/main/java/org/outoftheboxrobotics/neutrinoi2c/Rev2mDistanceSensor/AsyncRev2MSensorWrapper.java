@@ -32,7 +32,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class AsyncRev2MSensor implements OpModeManagerNotifier.Notifications, Runnable{
+@Deprecated
+public class AsyncRev2MSensorWrapper implements OpModeManagerNotifier.Notifications, Runnable{
     private static final int RESULT_INTERRUPT_STATUS = 0x13, RESULT_RANGE_STATUS = 0x14, SYSTEM_INTERRUPT_CLEAR = 0x0B;
 
     public enum AccuracyMode{
@@ -68,7 +69,7 @@ public class AsyncRev2MSensor implements OpModeManagerNotifier.Notifications, Ru
         //Runaway threads, especially those manually sending i2c requests like we are, is a horrible idea
     }
 
-    public AsyncRev2MSensor(Rev2mDistanceSensor sensor){
+    public AsyncRev2MSensorWrapper(Rev2mDistanceSensor sensor){
         LynxI2cDeviceSynch device = null;
         try {
             /**

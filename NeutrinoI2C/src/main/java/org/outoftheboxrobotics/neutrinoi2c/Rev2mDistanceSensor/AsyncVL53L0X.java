@@ -958,13 +958,12 @@ public class AsyncVL53L0X extends I2cDeviceSynchDevice<I2cDeviceSynch> implement
     protected int readRangeContinuousMillimeters() {
         // assumptions: Linearity Corrective Gain is 1000 (default);
         // fractional ranging is not enabled
-        int range = (int)TypeConversion.byteArrayToShort(deviceClient.read(RESULT_RANGE_STATUS.bVal + 10, 2));
-        writeReg(SYSTEM_INTERRUPT_CLEAR.bVal, 0x01);
 
         if((System.currentTimeMillis() - lastRun) > measurement_timing_budget_us){
             if((readReg(RESULT_INTERRUPT_STATUS) & 0x07) != 0){
                 cachedDistance = (int)TypeConversion.byteArrayToShort(deviceClient.read(RESULT_RANGE_STATUS.bVal + 10, 2));
                 writeReg(SYSTEM_INTERRUPT_CLEAR.bVal, 0x01);
+                lastRun = System.currentTimeMillis();
             }
         }
 

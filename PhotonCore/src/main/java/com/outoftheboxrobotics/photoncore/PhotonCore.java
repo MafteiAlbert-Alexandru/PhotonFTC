@@ -260,7 +260,7 @@ public class PhotonCore implements Runnable, OpModeManagerNotifier.Notifications
                 map.put(s, photonLynxModule);
                 replacements.put(module, photonLynxModule);
 
-                if(module.isParent() && (hasChub && LynxConstants.isEmbeddedSerialNumber(module.getSerialNumber())) && CONTROL_HUB == null){
+                if(module.isParent() && CONTROL_HUB == null){
                     CONTROL_HUB = photonLynxModule;
 
                     ConcurrentHashMap<Integer, LynxRespondable> unfinishedCommands = new ConcurrentHashMap<>();
